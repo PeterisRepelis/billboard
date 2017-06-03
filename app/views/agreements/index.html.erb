@@ -1,0 +1,43 @@
+<div class="index-view">
+  <div><h3>Nomas līgumu saraksts</h3></div>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Klients</th>
+      <th>Mēnešu skaits</th>
+      <th>Dienu skaits</th>
+      <th>Stendi</th>
+      <th>Kopā</th>
+      <th>Atlaide</th>
+      <th>Kopā ar atlaidi</th>
+    </tr>
+    <% @agreements.each do |c| %>
+      <tr>
+        <td><%= c.id %></td>
+        <td><%= c.customer.try(:name) %></td>
+        <td><%= c.months_count %></td>
+        <td><%= c.days_count %></td>
+        <td><%= c.agreement_billboards.map{|a| a.billboard_item.to_s}.join(", ") %></td>
+        <td><%= c.total_amount %></td>
+        <td><%= "#{c.customer.discount || 0}%" %></td>
+        <td><%= c.total_amount_with_discount %></td>
+      </tr>
+    <% end %>
+  </table>  
+
+  </br >
+  <div><h3>Pievienot līgumu</h3></div>
+
+  <%= simple_nested_form_for @agreement, html: { novalidate: 'true'} do |f| %>
+    <%= f.input :customer_id, label: 'Klients', as: :select, collection: Customer.all, include_blank: false %>
+    <%= f.input :months_count, label: 'Mēnešu skaits' %>
+    <%= f.input :days_count, label: 'Dienu skaits' %>
+    <%= f.simple_fields_for :agreement_billboards, @agreement.agreement_billboards do |item| %>
+      <%= item.input :billboard_item_id, label: 'Stends', as: :select, collection: BillboardItem.all, include_blank: false %>
+      <%= item.input :test_set_id, input_html: {value: @agreement.id}, as: :hidden %>
+      <%= item.link_to_remove "dzēst" %>
+    <% end %> 
+    <p><%= f.link_to_add "pievienot stendu", :agreement_billboards %></p>
+    <%= f.button :submit, value: 'Izveidot' %>
+  <% end %>
+</div>  

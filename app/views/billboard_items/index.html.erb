@@ -1,0 +1,35 @@
+<div class="index-view">
+  <div><h3>Stendu saraksts</h3></div>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Nosaukums</th>
+      <th>Veids</th>
+      <th>Vai ir salauzts?</th>
+      <th>Vizuālais stāvoklis</th>
+      <th>Tehniskais stāvoklis</th>
+    </tr>
+    <% @billboards.each do |c| %>
+      <tr>
+        <td><%= c.id %></td>
+        <td><%= c.name %></td>
+        <td><%= c.billboard_type %></td>
+        <td><%= c.is_broken %></td>
+        <td><%= c.visual_state %></td>
+        <td><%= c.technical_state %></td>
+      </tr>
+    <% end %>
+  </table>  
+
+  </br >
+  <div><h3>Pievienot stendu</h3></div>
+
+  <%= simple_form_for @billboard, html: { novalidate: 'true'} do |f| %>
+    <%= f.input :name, label: 'Nosaukums' %>
+    <%= f.input :billboard_type_id, label: 'Stenda veids', as: :select, collection: BillboardType.all, include_blank: false %>
+    <%= f.input :is_broken, label: 'Vai ir salauzts?' %>
+    <%= f.input :visual_state, label: 'Vizuālais stāvoklis' %>
+    <%= f.input :technical_state, label: 'Tehniskais stāvoklis' %>
+    <%= f.button :submit, value: 'Izveidot' %>
+  <% end %>
+</div>  

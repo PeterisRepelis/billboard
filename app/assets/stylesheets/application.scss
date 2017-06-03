@@ -1,0 +1,25 @@
+@import "bootstrap";
+@import "bootstrap-sprockets";
+
+
+.index-view {
+  input, textarea {
+    width: 100%;
+  }
+
+  table {
+    width: 100%;
+
+    th {
+      background: #ccc;
+    }
+
+    td, th {
+      border: 1px solid #333;
+    }
+  }
+
+  #billboard_item_is_broken {
+    width: 50px;
+  }
+}

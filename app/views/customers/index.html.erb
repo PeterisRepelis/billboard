@@ -1,0 +1,26 @@
+<div class="index-view">
+  <div><h3>Klientu saraksts</h3></div>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Nosaukums</th>
+      <th>Atlaide</th>
+    </tr>
+    <% @customers.each do |c| %>
+      <tr>
+        <td><%= c.id %></td>
+        <td><%= c.name %></td>
+        <td><%= c.discount %></td>
+      </tr>
+    <% end %>
+  </table>  
+
+  </br >
+  <div><h3>Pievienot klientu</h3></div>
+
+  <%= simple_form_for Customer.new, html: { novalidate: 'true'} do |f| %>
+    <%= f.input :name, label: 'Klienta nosaukums' %>
+    <%= f.input :discount, label: 'Atlaide (%)' %>
+    <%= f.button :submit, value: 'Izveidot' %>
+  <% end %>
+</div>  

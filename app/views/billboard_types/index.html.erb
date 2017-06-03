@@ -1,0 +1,38 @@
+<div class="index-view">
+  <div><h3>Stendu veidu saraksts</h3></div>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Apraksts</th>
+      <th>Attēls</th>
+      <th>Maksa par dienu</th>
+      <th>Maksa par mēnesi</th>
+    </tr>
+    <% @billboard_types.each do |c| %>
+      <tr>
+        <td><%= c.id %></td>
+        <td><%= c.description %></td>
+        <td>
+          <a href="<%= c.main_image.url %>" target="_blank">
+            <img src="<%= c.main_image.url(:thumb) %>" />
+          </a>
+        </td>
+        <td><%= c.price_per_day %></td>
+        <td><%= c.price_per_month %></td>
+      </tr>
+    <% end %>
+  </table>  
+
+  </br >
+  <div><h3>Pievienot stendu veidu</h3></div>
+
+  <%= simple_form_for @billboard_type, html: { novalidate: 'true'} do |f| %>
+    <%= f.input :description, label: 'Apraksts' %>
+    <%= f.input :main_image, label: 'Attēls' %>
+    <%= f.input :price_per_day, label: 'Maksa par dienu' %>
+    <%= f.input :price_per_month, label: 'Maksa par mēnesi' %>
+    <%= f.button :submit, value: 'Izveidot' %>
+  <% end %>
+</div>  
+
+
