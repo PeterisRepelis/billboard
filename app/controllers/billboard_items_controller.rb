@@ -12,7 +12,7 @@ class BillboardItemsController < ApplicationController
   private
 
   def billboard_items_params
-    params.require(:billboard_item).permit(:is_broken, :visual_state, :technical_state, :name, :billboard_type_id)
+    params.require(:billboard_item).permit(:is_broken, :visual_state, :technical_state, :name, :billboard_type_id, :is_unusable)
   end
 end
 

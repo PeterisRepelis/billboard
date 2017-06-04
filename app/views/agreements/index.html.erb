@@ -17,7 +17,12 @@
         <td><%= c.customer.try(:name) %></td>
         <td><%= c.months_count %></td>
         <td><%= c.days_count %></td>
-        <td><%= c.agreement_billboards.map{|a| a.billboard_item.to_s}.join(", ") %></td>
+        <td>
+        <% c.agreement_billboards.each do |bilbord| %>
+          <div><%= bilbord.billboard_item.to_s %></div>
+          </br>
+        <% end %>
+        </td>
         <td><%= c.total_amount %></td>
         <td><%= "#{c.customer.discount || 0}%" %></td>
         <td><%= c.total_amount_with_discount %></td>

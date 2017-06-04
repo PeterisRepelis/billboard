@@ -8,6 +8,7 @@
       <th>Vai ir salauzts?</th>
       <th>Vizuālais stāvoklis</th>
       <th>Tehniskais stāvoklis</th>
+      <th>Norakstīts</th>
     </tr>
     <% @billboards.each do |c| %>
       <tr>
@@ -17,6 +18,7 @@
         <td><%= c.is_broken %></td>
         <td><%= c.visual_state %></td>
         <td><%= c.technical_state %></td>
+        <td><%= c.is_unusable %></td>
       </tr>
     <% end %>
   </table>  
@@ -27,9 +29,10 @@
   <%= simple_form_for @billboard, html: { novalidate: 'true'} do |f| %>
     <%= f.input :name, label: 'Nosaukums' %>
     <%= f.input :billboard_type_id, label: 'Stenda veids', as: :select, collection: BillboardType.all, include_blank: false %>
-    <%= f.input :is_broken, label: 'Vai ir salauzts?' %>
-    <%= f.input :visual_state, label: 'Vizuālais stāvoklis' %>
-    <%= f.input :technical_state, label: 'Tehniskais stāvoklis' %>
+    <%= f.input :is_broken, label: 'Ir salauzts' %>
+    <%= f.input :is_broken, label: 'Ir norakstīts' %>
+    <%= f.input :visual_state, label: 'Vizuālais stāvoklis', as: :select, collection: [1,2,3,4,5], include_blank: false  %>
+    <%= f.input :technical_state, label: 'Tehniskais stāvoklis', as: :select, collection: [1,2,3,4,5], include_blank: false  %>
     <%= f.button :submit, value: 'Izveidot' %>
   <% end %>
 </div>  

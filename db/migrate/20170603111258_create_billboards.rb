@@ -6,6 +6,7 @@ class CreateBillboards < ActiveRecord::Migration
       t.integer :visual_state
       t.integer :technical_state
       t.integer :billboard_type_id
+      t.boolean :is_unusable, default: false
       t.timestamps
     end
 
